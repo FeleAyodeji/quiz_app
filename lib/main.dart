@@ -26,6 +26,18 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  List<Icon> scoreKeeper = [];
+  List<String> question = [
+    "billionaire fele ayodeji has 12cars ?",
+    'gbemisola is the madam ?',
+    "he is not kind ?"
+  ];
+  List <bool> answers = [
+    true, true , false
+  ];
+
+  int questionNumber = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -38,7 +50,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10),
             child: Center(
               child: Text(
-                "this is where the question text will go",
+                question[questionNumber],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25,
@@ -52,9 +64,7 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: FlatButton(
-              textColor: Colors.white,
               color: Colors.green,
-              onPressed: null,
               child: Text(
                 "True",
                 style: TextStyle(
@@ -62,6 +72,18 @@ class _QuizPageState extends State<QuizPage> {
                   color: Colors.white,
                 ),
               ),
+              onPressed: (){
+                bool correctAns = answers[questionNumber];
+                if(correctAns == true){
+                  print("user got it right");
+                }
+                else{
+                  print("you got it wrong");
+                }
+                setState(() {
+                  questionNumber++;
+                });
+              },
             ),
           ),
         ),
@@ -69,9 +91,7 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: FlatButton(
-              textColor: Colors.white,
               color: Colors.red,
-              onPressed: null,
               child: Text(
                 "false",
                 style: TextStyle(
@@ -79,8 +99,24 @@ class _QuizPageState extends State<QuizPage> {
                   color: Colors.white,
                 ),
               ),
+              onPressed: (){ 
+                
+                bool correctAns = answers[questionNumber];
+                if(correctAns == false) {
+                  print("you are right");
+                }
+                else{
+                  print("wrong");
+                }
+                setState(() {
+                  questionNumber++;
+                });
+              },
             ),
           ),
+        ),
+        Row(
+          children: scoreKeeper,
         ),
       ],
     );
