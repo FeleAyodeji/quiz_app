@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'question.dart';
 
 void main() => runApp(QuizApp());
 
@@ -27,14 +28,15 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
-  List<String> question = [
-    "billionaire fele ayodeji has 12cars ?",
-    'gbemisola is the madam ?',
-    "he is not kind ?"
-  ];
-  List <bool> answers = [
-    true, true , false
-  ];
+
+   List<Question> questionBank = [
+
+  Question(a:"billionaire fele ayodeji has 12cars ?",  q: true ), // a object created from the constructor.
+  Question(a: 'gbemisola is the madam ?',q: true ) ,// a object created from the constructor.
+  Question(a: "he is not kind ?" , q: false) // a object created from the constructor.
+
+   ];
+
 
   int questionNumber = 0;
 
@@ -50,7 +52,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10),
             child: Center(
               child: Text(
-                question[questionNumber],
+                questionBank[questionNumber].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25,
@@ -73,7 +75,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: (){
-                bool correctAns = answers[questionNumber];
+                bool correctAns = questionBank[questionNumber].questionAnswer;
                 if(correctAns == true){
                   print("user got it right");
                 }
@@ -101,7 +103,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: (){ 
                 
-                bool correctAns = answers[questionNumber];
+                bool correctAns = questionBank[questionNumber].questionAnswer;
                 if(correctAns == false) {
                   print("you are right");
                 }
