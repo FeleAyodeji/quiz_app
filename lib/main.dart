@@ -109,7 +109,7 @@ class _QuizPageState extends State<QuizPage> {
                   print("you are right");
                 }
                 else{
-                  print("wrong");
+                  print("you are wrong");
                 }
                 setState(() {
                   questionNumber++;
