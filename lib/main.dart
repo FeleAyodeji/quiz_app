@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'question.dart';
+import 'quiz_brain.dart';
+
+Quizbrain quizbrain = Quizbrain();
+
 
 void main() => runApp(QuizApp());
 
@@ -29,15 +32,6 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
-   List<Question> questionBank = [
-
-  Question(a:"billionaire fele ayodeji has 12cars ?",  q: true ), // a object created from the constructor.
-  Question(a: 'gbemisola is the madam ?',q: true ) ,// a object created from the constructor.
-  Question(a: "he is not kind ?" , q: false) // a object created from the constructor.
-
-   ];
-
-
   int questionNumber = 0;
 
   @override
@@ -52,7 +46,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10),
             child: Center(
               child: Text(
-                questionBank[questionNumber].questionText,
+                quizbrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25,
@@ -66,7 +60,7 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: FlatButton(
-              color: Colors.green.shade600,
+              color: Colors.green,
               child: Text(
                 "True",
                 style: TextStyle(
@@ -75,7 +69,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: (){
-                bool correctAns = questionBank[questionNumber].questionAnswer;
+                bool correctAns = quizbrain.getAnswer();
                 if(correctAns == true){
                   print("user got it right");
                 }
@@ -83,7 +77,7 @@ class _QuizPageState extends State<QuizPage> {
                   print("you got it wrong");
                 }
                 setState(() {
-                  questionNumber++;
+                  quizbrain.nextQuestion();
                 });
               },
             ),
@@ -93,8 +87,7 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: FlatButton(
-              color: Colors.red.shade600
-              ,
+              color: Colors.red,
               child: Text(
                 "false",
                 style: TextStyle(
@@ -104,7 +97,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: (){ 
                 
-                bool correctAns = questionBank[questionNumber].questionAnswer;
+                bool correctAns = quizbrain.getAnswer();
                 if(correctAns == false) {
                   print("you are right");
                 }
@@ -112,7 +105,7 @@ class _QuizPageState extends State<QuizPage> {
                   print("you are wrong");
                 }
                 setState(() {
-                  questionNumber++;
+                  quizbrain.nextQuestion();
                 });
               },
             ),
